@@ -1,11 +1,25 @@
-from ui.pages.base_page import BasePage
+from playwright.sync_api import Page
 
-class LoginPage(BasePage):
-    LOGIN = "#login"
+class LoginPage:
+    USERNAME = "#user-name"
     PASSWORD = "#password"
-    SUBMIT = "#submit"
+    LOGIN_BTN = "#login-button"
+    ERROR_MSG = "[data-test=error]"
 
-    def login(self, login: str, password: str):
-        self.fill(self.LOGIN, login)
-        self.fill(self.PASSWORD, password)
-        self.click(self.SUBMIT)
+    def __init__(self, page: Page):
+        self.page = page
+
+    def open(self):
+        self.page.goto("https://www.saucedemo.com/")
+
+    def enter_username(self, username: str):
+        self.page.fill(self.USERNAME, username)
+
+    def enter_password(self, password: str):
+        self.page.fill(self.PASSWORD, password)
+
+    def submit(self):
+        self.page.click(self.LOGIN_BTN)
+
+    def get_error(self) -> str:
+        return self.page.text_content(self.ERROR_MSG)

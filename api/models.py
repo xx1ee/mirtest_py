@@ -1,6 +1,25 @@
 from pydantic import BaseModel
+from typing import List, Optional
 
-class User(BaseModel):
+class LoginResponse(BaseModel):
+    token: str
+    user_id: int
+
+
+
+
+class CartProduct(BaseModel):
     id: int
-    username: str
-    email: str
+    title: str
+    price: float
+    quantity: int
+    total: float
+
+
+class Cart(BaseModel):
+    id: int
+    userId: int
+    total: float
+    discountedTotal: int
+    products: List[CartProduct]
+

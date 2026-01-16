@@ -1,7 +1,7 @@
-from ui.pages.base_page import BasePage
+# ui/pages/dashboard_page.py
+class DashboardPage:
+    def __init__(self, page):
+        self.page = page
 
-class DashboardPage(BasePage):
-    USERNAME = "#username"
-
-    def get_username(self) -> str:
-        return self.page.text_content(self.USERNAME)
+    def is_opened(self) -> bool:
+        return self.page.locator("h6:has-text('Dashboard')").is_visible()
