@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page
-from config.settings import settings
+from conf.settings import settings
 from api.client import APIClient
 
 @pytest.fixture
